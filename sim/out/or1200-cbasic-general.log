@@ -1,0 +1,15 @@
+Seeding random generator with value 0x788091b1
+Data MMU 0KB: 1 ways, 64 sets, entry size 1 bytes
+Insn MMU 0KB: 1 ways, 64 sets, entry size 1 bytes
+Ethernet TAP type
+Verbose on, simdebug on, interactive prompt off
+Machine initialization...
+Clock cycle: 20ns
+Data cache present.
+Insn cache tag present.
+BPB simulation off.
+BTIC simulation off.
+Resetting Tick Timer.
+Resetting Power Management.
+Starting at 0x00000000
+Listening for RSP on port 3333

@@ -1,0 +1,15 @@
+对or1200_defines.v进行的修改包括：
+
+关闭`define OR1200_ASIC。
+对于RAM类型，打开`define OR1200_ALTERA_LPM，关闭其他选项。
+打开`define OR1200_NO_DC和`define OR1200_NO_IC，因为目前or1200_ic部分还有Bug。
+关闭`define OR1200_NO_DMMU和`define OR1200_NO_IMMU，这是因为运行Linux操作系统需要使用MMU。
+关闭`define OR1200_ASIC_MULTP2_32X32，打开`define OR1200_GENERIC_MULTP2_32X32，这是因为在FPGA实现用乘法器可以使用FPGA内部的DSP资源。
+关闭`define OR1200_CLKDIV_2_SUPPORTED和`define OR1200_CLKDIV_4_SUPPORTED，这是因为FPGA的工作频率较低，外部的SRAM和Flash的工作频率完全可以与处理器核心一样，这样也减少了关闭IC和DC对系统性能的影响。
+对于寄存器文件，打开OR1200_RFRAM_DUALPORT，关闭其他选项，双口RAM是FPGA支持的RAM类型。
+其他选项使用默认值即可，读者也可以根据自己的需要进行修改。
+对eth_defines.v的修改包括：打开`define ETH_ALTERA_ALTSYNCRAM，以使用Altera FPGA的内部块RAM资源。
+
+对于UART控制器，数据接收和发送FIFO都需要修改。在原代码中，
+这两个模块都调用了raminfr模块，初始化参数都设置为#(4,8,16)，
+因此只需修改raminfr即可，该双口RAM的地址宽度为4，数据宽度为8，深度为16，直接用Quartus II的Tools->Megawizard Plug-in Manager生成即可。生成时的参数选择见下图。该图显示的是生成raminfr时的第2a和第4页。
